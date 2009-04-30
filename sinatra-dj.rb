@@ -38,10 +38,23 @@ class Translation < ActiveRecord::Base
 end
 
 helpers do
-  def captcha_pass?(session, answer)
-    session = session.to_i
-    answer  = answer.gsub(/\W/, '')
+  def captcha_pass?
+    session = params[:session].to_i
+    answer  = params[:answer].gsub(/\W/, '')
     open("http://captchator.com/captcha/check_answer/#{session}/#{answer}").read.to_i.nonzero? rescue false
+  end
+
+  def captcha_session
+    @captcha_session ||= rand(9000) + 1000
+  end
+
+  def captcha_answer_tag
+    "<input id=\"captcha-answer\" name=\"answer\" type=\"text\" size=\"10\"/>"
+  end
+
+  def captcha_image_tag
+    "<input name=\"session\" type=\"hidden\" value=\"#{captcha_session}\"/>\n" +
+    "<img id=\"captcha-image\" src=\"http://captchator.com/captcha/image/#{captcha_session}\"/>"
   end
 end
 
@@ -52,9 +65,7 @@ get '/' do
 end
 
 post '/translations' do
-  unless captcha_pass?(params[:session], params[:answer])
-    halt 401, "Invalid Captcha Answer"
-  end
+  halt 401, "Invalid Captcha Answer" unless captcha_pass?
   Translation.create! :input => params[:input]
   redirect '/'
 end
@@ -84,8 +95,7 @@ __END__
 <h2>New Translation</h2>
 <form method="post" action="/translations">
   <div><textarea rows="3" cols="80" name="input">Enter text to translate</textarea></div>
-  <div><img src="http://captchator.com/captcha/image/<%= @session %>"/></p>
-  <p><input name="session" type="hidden" value="<%= @session %>"/></p>
-  <p><input name="answer" type="text" size="10"/></div>
+  <p><%= captcha_image_tag %></p>
+  <p><%= captcha_answer_tag %></div>
   <div><input type="submit" value="Submit" /></div>
 </form>
