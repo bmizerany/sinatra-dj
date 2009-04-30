@@ -1,6 +1,7 @@
-$LOAD_PATH.unshift 'vendor/delayed_job/lib'
+$:.unshift *Dir[File.dirname(__FILE__) + "/vendor/*/lib"]
 
 require 'sinatra'
+require 'sinatra/captcha'
 require 'activerecord'
 require 'delayed_job'
 require 'open-uri'
@@ -34,27 +35,6 @@ class Translation < ActiveRecord::Base
         (word[1,9999] + word[0,1] + "ay").downcase
       end
     end.join(" ")
-  end
-end
-
-helpers do
-  def captcha_pass?
-    session = params[:session].to_i
-    answer  = params[:answer].gsub(/\W/, '')
-    open("http://captchator.com/captcha/check_answer/#{session}/#{answer}").read.to_i.nonzero? rescue false
-  end
-
-  def captcha_session
-    @captcha_session ||= rand(9000) + 1000
-  end
-
-  def captcha_answer_tag
-    "<input id=\"captcha-answer\" name=\"answer\" type=\"text\" size=\"10\"/>"
-  end
-
-  def captcha_image_tag
-    "<input name=\"session\" type=\"hidden\" value=\"#{captcha_session}\"/>\n" +
-    "<img id=\"captcha-image\" src=\"http://captchator.com/captcha/image/#{captcha_session}\"/>"
   end
 end
 
