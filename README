@@ -1,4 +1,4 @@
-A simple example of Sinatra + DJ
+A simple example of Sinatra + DJ (Delayed Job http://github.com/tobi/delayed_job)
 
 You can see it in action @ http://sinatra-dj.heroku.com
 
