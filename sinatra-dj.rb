@@ -4,8 +4,6 @@ require 'sinatra'
 require 'activerecord'
 require 'delayed_job'
 
-require File.dirname(__FILE__) + '/lib/translation'
-
 configure do
   config = YAML::load(File.open('config/database.yml'))
   environment = Sinatra::Application.environment.to_s
@@ -47,3 +45,31 @@ post '/translations' do
   Translation.create! :input => params[:input]
   redirect '/'
 end
+
+use_in_file_templates!
+
+__END__
+
+@@ translations
+
+<h1>Pig Latin Translator</h1>
+<h2>An example of Sinatra + DJ on Heroku</h2>
+<h3>see the <a href="http://github.com/bmizerany/sinatra-dj">code</a></h3>
+
+<% @translations.each do |translation| %>
+  <ul>
+    <li>
+      <span><%= translation.input %></span>
+      <span>&rarr;</span>
+      <span><%= translation.output || '<i>...pending...</i>' %></span>
+    </li>
+  </ul>
+<% end %>
+
+<hr/>
+
+<h2>New Translation</h2>
+<form method="post" action="/translations">
+  <div><textarea rows="3" cols="80" name="input">Enter text to translate</textarea></div>
+  <div><input type="submit" value="Submit" /></div>
+</form>
