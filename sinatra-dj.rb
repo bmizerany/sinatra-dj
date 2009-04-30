@@ -57,8 +57,8 @@ __END__
 @@ translations
 
 <h1>Pig Latin Translator</h1>
-<h2>An example of Sinatra + DJ on Heroku</h2>
-<h3>see the <a href="http://github.com/bmizerany/sinatra-dj">code</a></h3>
+<h2>An example of <a href="http://www.sinatrarb.com">Sinatra</a> + <a href="http://github.com/tobi/delayed_job/">DJ (Delayed Job)</a> on Heroku</h2>
+<h3>See the <a href="http://github.com/bmizerany/sinatra-dj">code</a></h3>
 
 <% @translations.each do |translation| %>
   <ul>
