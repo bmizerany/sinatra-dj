@@ -17,3 +17,9 @@ namespace :db do
     ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"].tap { |v| v.to_i if v })
   end
 end
+
+begin
+  require 'delayed/tasks'
+rescue LoadError
+  STDERR.puts "Run `rake gems:install` to install delayed_job"
+end
