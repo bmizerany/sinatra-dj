@@ -2,7 +2,7 @@ $:.unshift *Dir[File.dirname(__FILE__) + "/vendor/*/lib"]
 
 require 'sinatra'
 require 'sinatra/captcha'
-require 'activerecord'
+require 'active_record'
 require 'delayed_job'
 require 'open-uri'
 
@@ -50,7 +50,7 @@ post '/translations' do
   redirect '/'
 end
 
-use_in_file_templates!
+enable :inline_templates
 
 __END__
 
