@@ -1,0 +1,136 @@
+body {
+  background-color: #505;
+}
+
+h1 {
+  text-align: center;
+  color: #ee0;
+  font-size: 300%;
+  font-family: "Chalkboard", "Comic Sans MS", sans-serif;
+}
+
+#container {
+  margin: 1em auto;
+  position: relative;
+  width: 540px;
+  text-align: left;
+}
+
+#content {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#sidebar {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 130px;
+  padding: 10px;
+  background-color: #808;
+  color: #fff;
+  text-align: center;
+  border-left: 1px solid #888;
+  border-bottom: 1px solid #888;
+}
+
+#sidebar a {
+  color: #ee0;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#sidebar a:hover {
+  color: #00f;
+  text-decoration: underline;
+}
+
+ul.translations {
+  margin: 50px 0 0 0;
+  list-style: none;
+  background-color: #dfd;
+  padding: 0px 10px;
+}
+
+li:first-child.translation {
+  border-top: none;
+}
+
+li.translation {
+  position: relative;
+  border-top: 1px dashed #aaa;
+  padding: 0.7em 0px 0.6em 0px;
+  margin: 0px 0px;
+}
+
+li.latest {
+  display: none;
+}
+
+.avatar {
+  display: block;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  left: 0px;
+  margin: 0px 10px 0px 0px;
+  overflow: hidden;
+}
+
+.avatar a {
+  text-decoration: none;
+}
+
+.avatar img {
+  height: 48px;
+  width: 48px;
+  border-color: transparent;
+  border-width: 0px;
+}
+
+.main {
+  display: block;
+  margin-left: 60px;
+  min-height: 50px;
+  width: 455px;
+  overflow: hidden;
+}
+
+.text {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.text a {
+  text-decoration: none;
+  color: #000;
+}
+
+.text a:hover {
+  text-decoration: underline;
+  color: #00f;
+}
+
+.meta {
+  display: block;
+  margin: 3px 0px 0px 20px;
+  color: #444;
+  font-size: 0.764em;
+}
+
+.meta a {
+  text-decoration: none;
+  color: #444;
+}
+
+.meta a:hover {
+  text-decoration: underline;
+  color: #00f;
+}
+
+.lol {
+  font-size: 130%;
+  font-weight: bold;
+  color: #f00;
+}

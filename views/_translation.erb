@@ -1,0 +1,10 @@
+<% translations.each do |translation| %>
+  <li>
+    <span><%= translation.input %></span>
+    <span>&rarr;</span>
+    <span><%= translation.output || '<i>...pending...</i>' %></span>
+  </li>
+<% end %>
+<% if !translations.empty? %>
+  <script  window.latestTranslationId = <%= translations[0].id} %>;
+<% end %>
