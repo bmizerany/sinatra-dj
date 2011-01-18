@@ -1,0 +1,23 @@
+<h1>Pig Latin Translator</h1>
+<h2>An example of <a href="http://www.sinatrarb.com">Sinatra</a> + <a href="http://github.com/tobi/delayed_job/">DJ (Delayed Job)</a> on Heroku</h2>
+<h3>See the <a href="http://github.com/bmizerany/sinatra-dj">code</a></h3>
+
+<% @translations.each do |translation| %>
+  <ul>
+    <li>
+      <span><%= translation.input %></span>
+      <span>&rarr;</span>
+      <span><%= translation.output || '<i>...pending...</i>' %></span>
+    </li>
+  </ul>
+<% end %>
+
+<hr/>
+
+<h2>New Translation</h2>
+<form method="post" action="/translations">
+  <div><textarea rows="3" cols="80" name="input">Enter text to translate</textarea></div>
+  <p><%= captcha_image_tag %></p>
+  <p><%= captcha_answer_tag %></div>
+  <div><input type="submit" value="Submit" /></div>
+</form>
