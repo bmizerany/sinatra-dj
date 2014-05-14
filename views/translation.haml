@@ -1,0 +1,12 @@
+- translations.each do |translation|
+  - if translation.output
+    %li.translation{:class => @translation_class}
+      %span.text= translation.input
+      %span &rarr;
+      %span.text= translation.output
+  - else
+    %li.translation{:class => @pending_class}
+      %span.text= translation.input
+      %span &rarr;
+      %span
+        %em &hellip;pending&hellip;

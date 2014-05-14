@@ -1,0 +1,37 @@
+:javascript
+  function refreshTranslations() {
+    $.get('/latest', function(data) {
+      $(".pending").remove();
+      $(".translations").prepend(data);
+      $(".latest").slideDown(1000);
+      $(".translations li:gt(50)").remove();
+      setTimeout(refreshTranslations, 10000);
+    });
+  }
+  $(function() {
+    setTimeout(refreshTranslations, 10000);
+  });
+
+%h1 Pig Latin Translator
+%h2
+  An example of 
+  %a{:href => "http://www.sinatrarb.com"} Sinatra
+  +
+  %a{:href => "http://github.com/tobi/delayed_job/"} DJ (Delayed Job)
+  (Possibly on Heroku)
+%h3
+  See the
+  %a{:href => "http://github.com/bmizerany/sinatra-dj"} code.
+
+%ul.translations
+  = haml :translation, :layout => false, :locals => { :translations => translations }
+
+%hr
+
+%h2 New Translation
+%form{:method => "post", :action => "translations"}
+  %div
+    %textarea{:rows => "3", :cols => "80", :name => "input"}
+      Enter text to translate
+  %div
+    %input{:type => "submit", :value => "Translate"}
